@@ -1,0 +1,80 @@
+h1 {
+  display: flex;
+  justify-content: left;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 50px;
+}
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px;
+}
+.main {
+  display: flex;
+  justify-content: left;
+  padding: 10px;
+  size-adjust: 100px;
+  position: fixed;
+  padding: 5px;
+  margin-left: 25px;
+}
+
+.main-2 {
+  display: flex;
+  justify-content: right;
+  position: fixed;
+  padding: 30px;
+  word-spacing: 5px;
+}
+.days {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+}
+.temp {
+  color: rgb(54, 142, 214);
+}
+.current {
+  display: flex;
+  justify-content: right;
+  font-size: 60px;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+.cont {
+  box-shadow: rgba(3, 9, 107, 0.56) 0px 22px 70px 4px;
+  border-radius: 20px;
+  padding: 5px;
+  width: 650px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#button {
+  background-image: linear-gradient(#0dccea, #0d70ea);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 15px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9em;
+  margin: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  user-select: none;
+  touch-action: manipulation;
+}

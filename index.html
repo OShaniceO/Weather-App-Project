@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="cont">
+      <form class="box" id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search For Your City"
+        />
+        <input type="submit" value="Search" id="button" />
+      </form>
+      <h1 class="bebas-neue-regular" id="current-city">
+        <strong>Cape Town</strong>
+      </h1>
+      <div>
+        <p class="main" id="current-date">Friday 9:43pm</p>
+        <p class="main-2" id="weather-details">
+          Humidity: <span class="temp"><strong>50%</strong></span
+          >, Wind: <span class="temp"><strong>8.0 km/h</strong></span>
+        </p>
+      </div>
+      <br />
+      <div class="current" id="temperature">
+        &#9925; <strong>15&deg;</strong><em>C</em>
+      </div>
+      <br />
+      <ul class="days">
+        <li>
+          <strong>Sun</strong>&#9925;
+          <div>25&deg;C- 18&deg;C</div>
+        </li>
+        <li>
+          <strong>Mon</strong>&#9728;
+          <div>29&deg;C- 22&deg;C</div>
+        </li>
+        <li>
+          <strong>Tue</strong>&#127781;
+          <div>22&deg;C- 13&deg;C</div>
+        </li>
+        <li>
+          <strong>Wed</strong>&#127784;
+          <div>18&deg;C- 22&deg;C</div>
+        </li>
+        <li>
+          <strong>Thu</strong>&#9925;
+          <div>14&deg;C- 20&deg;C</div>
+          <br />
+          <div>
+            <footer>
+              Coded By Shanice Jones on
+              <a href="https://www.shecodes.io/">SheCodes</a>
+            </footer>
+          </div>
+        </li>
+      </ul>
+      <br />
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
