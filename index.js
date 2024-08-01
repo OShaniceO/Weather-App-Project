@@ -36,7 +36,7 @@ function updateWeatherDisplay(city, weatherInfo) {
     const iconUrl = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
 
     document.getElementById("temperature").innerHTML =
-      `&#9925; <strong>${tempCelsius}&deg;C</strong>`;
+      `<strong>${tempCelsius}&deg;C</strong>`;
     document.getElementById("weather-details").innerHTML =
       `Humidity: <strong>${humidity}%</strong>, Wind: <strong>${windSpeed} km/h</strong>, Description: <strong>${description}</strong>`;
     document.getElementById("icon-image").src = iconUrl;
