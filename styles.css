@@ -23,43 +23,57 @@ h1 {
   display: flex;
   justify-content: left;
   padding: 10px;
-  size-adjust: 100px;
-  position: fixed;
-  padding: 5px;
+  font-size: 20px;
   margin-left: 25px;
 }
 
 .main-2 {
   display: flex;
-  justify-content: right;
-  position: fixed;
-  padding: 30px;
+  justify-content: left;
+  padding: 10px;
   word-spacing: 5px;
+  margin-left: 25px;
 }
+
 .days {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
+  padding: 0;
 }
+
 .temp {
   color: rgb(54, 142, 214);
 }
+
 .current {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   font-size: 60px;
-  margin-left: 20px;
-  margin-right: 50px;
+  margin-top: 20px;
 }
+
+#weather-icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#icon-image {
+  width: 100px;
+  height: 100px;
+}
+
 .cont {
   box-shadow: rgba(3, 9, 107, 0.56) 0px 22px 70px 4px;
   border-radius: 20px;
-  padding: 5px;
+  padding: 20px;
   width: 650px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 50px;
+  margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
+  background: #fff;
 }
 
 #button {
