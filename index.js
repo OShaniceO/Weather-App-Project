@@ -1,5 +1,6 @@
 const apiKey = "cac0fb3b4f644470bf1402019e63b59f";
 const apiBaseURL = "https://api.weatherbit.io/v2.0/current";
+const apiForecastURL = "https://api.weatherbit.io/v2.0/forecast/daily";
 
 function fetchWeather(city) {
   const url = `${apiBaseURL}?city=${encodeURIComponent(city)}&key=${apiKey}`;
@@ -10,15 +11,33 @@ function fetchWeather(city) {
       console.log("API Response:", response.data);
       const weatherInfo = response.data;
       updateWeatherDisplay(city, weatherInfo);
+      fetchForecast(city);
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
       document.getElementById("current-city").innerHTML =
-        `<strong>Error fetching data</strong>`;
+        "<strong>Error fetching data</strong>";
       document.getElementById("temperature").innerHTML = "";
       document.getElementById("weather-details").innerHTML =
-        `Sorry, there was an error retrieving the weather data.`;
+        "Sorry, there was an error retrieving the weather data.";
       document.getElementById("weather-icon").innerHTML = "";
+    });
+}
+
+function fetchForecast(city) {
+  const url = `${apiForecastURL}?city=${encodeURIComponent(city)}&key=${apiKey}&days=7`;
+
+  axios
+    .get(url)
+    .then((response) => {
+      console.log("Forecast Response:", response.data);
+      const forecastData = response.data.data;
+      updateForecastDisplay(forecastData);
+    })
+    .catch((error) => {
+      console.error("Error fetching forecast data:", error);
+      document.getElementById("forecast").innerHTML =
+        "Sorry, there was an error retrieving the forecast data.";
     });
 }
 
@@ -42,12 +61,49 @@ function updateWeatherDisplay(city, weatherInfo) {
     document.getElementById("icon-image").src = iconUrl;
   } else {
     document.getElementById("current-city").innerHTML =
-      `<strong>City not found</strong>`;
+      "<strong>City not found</strong>";
     document.getElementById("temperature").innerHTML = "";
     document.getElementById("weather-details").innerHTML =
-      `Sorry, we don't know the weather for this city.`;
+      "Sorry, we don't know the weather for this city.";
     document.getElementById("weather-icon").innerHTML = "";
   }
+}
+
+function updateForecastDisplay(forecastData) {
+  const now = new Date();
+  const todayIndex = now.getDay();
+
+  const forecastContainer = document.getElementById("forecast");
+  forecastContainer.innerHTML = "<h2>7-Day Forecast</h2>";
+
+  const forecastGrid = document.createElement("div");
+  forecastGrid.classList.add("forecast-grid");
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  forecastData.forEach((forecast, index) => {
+    if (index !== 0) { // Skip the current day
+      const forecastDay = document.createElement("div");
+      forecastDay.classList.add("forecast-day");
+
+      const dayIndex = (todayIndex + index) % 7;
+      const dayName = days[dayIndex];
+
+      const tempCelsius = Math.round(forecast.temp);
+      const iconCode = forecast.weather.icon;
+      const iconUrl = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
+
+      forecastDay.innerHTML = `
+        <p>${dayName}</p>
+        <img src="${iconUrl}" alt="Weather Icon">
+        <p>${tempCelsius}&deg;C</p>
+      `;
+
+      forecastGrid.appendChild(forecastDay);
+    }
+  });
+
+  forecastContainer.appendChild(forecastGrid);
 }
 
 document
@@ -59,7 +115,7 @@ document
       fetchWeather(city);
     } else {
       document.getElementById("current-city").innerHTML =
-        `<strong>Please enter a city name</strong>`;
+        "<strong>Please enter a city name</strong>";
       document.getElementById("temperature").innerHTML = "";
       document.getElementById("weather-details").innerHTML = "";
       document.getElementById("weather-icon").innerHTML = "";
