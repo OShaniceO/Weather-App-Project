@@ -15,11 +15,9 @@ function fetchWeather(city) {
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
-      document.getElementById("current-city").innerHTML =
-        "<strong>Error fetching data</strong>";
+      document.getElementById("current-city").innerHTML = "<strong>Error fetching data</strong>";
       document.getElementById("temperature").innerHTML = "";
-      document.getElementById("weather-details").innerHTML =
-        "Sorry, there was an error retrieving the weather data.";
+      document.getElementById("weather-details").innerHTML = "Sorry, there was an error retrieving the weather data.";
       document.getElementById("weather-icon").innerHTML = "";
       document.getElementById("forecast").innerHTML = "";
     });
@@ -37,16 +35,14 @@ function fetchForecast(city) {
     })
     .catch((error) => {
       console.error("Error fetching forecast data:", error);
-      document.getElementById("forecast").innerHTML =
-        "Sorry, there was an error retrieving the forecast data.";
+      document.getElementById("forecast").innerHTML = "Sorry, there was an error retrieving the forecast data.";
     });
 }
 
 function updateWeatherDisplay(city, weatherInfo) {
   if (weatherInfo && weatherInfo.data && weatherInfo.data[0]) {
     const cityName = city.charAt(0).toUpperCase() + city.slice(1);
-    document.getElementById("current-city").innerHTML =
-      `<strong>${cityName}</strong>`;
+    document.getElementById("current-city").innerHTML = `<strong class="blue">${cityName}</strong>`;
 
     const tempCelsius = Math.round(weatherInfo.data[0].temp);
     const humidity = weatherInfo.data[0].rh;
@@ -55,28 +51,22 @@ function updateWeatherDisplay(city, weatherInfo) {
     const iconCode = weatherInfo.data[0].weather.icon;
     const iconUrl = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
 
-    document.getElementById("temperature").innerHTML =
-      `<strong>${tempCelsius}&deg;C</strong>`;
-    document.getElementById("weather-details").innerHTML =
-      `Humidity: <strong>${humidity}%</strong>, Wind: <strong>${windSpeed} km/h</strong>, Description: <strong>${description}</strong>`;
+    document.getElementById("temperature").innerHTML = `<strong>${tempCelsius}&deg;C</strong>`;
+    document.getElementById("weather-details").innerHTML = `Humidity: <span class="blue"><strong>${humidity}%</strong></span>, Wind: <span class="blue"><strong>${windSpeed} km/h</strong></span>, Description: <span class="blue"><strong>${description}</strong></span>`;
     document.getElementById("icon-image").src = iconUrl;
   } else {
-    document.getElementById("current-city").innerHTML =
-      "<strong>City not found</strong>";
+    document.getElementById("current-city").innerHTML = "<strong>City not found</strong>";
     document.getElementById("temperature").innerHTML = "";
-    document.getElementById("weather-details").innerHTML =
-      "Sorry, we don't know the weather for this city.";
+    document.getElementById("weather-details").innerHTML = "Sorry, we don't know the weather for this city.";
     document.getElementById("weather-icon").innerHTML = "";
     document.getElementById("forecast").innerHTML = "";
   }
 }
 
 function updateForecastDisplay(forecastData) {
-  const today = new Date().getDay();
   let forecastHTML = '';
 
   forecastData.forEach((day, index) => {
-    // Skip the forecast for today
     if (index === 0) return;
 
     const dayName = new Date(day.valid_date).toLocaleDateString('en-US', { weekday: 'long' });
@@ -89,7 +79,10 @@ function updateForecastDisplay(forecastData) {
       <div class="forecast-day">
         <h3>${dayName}</h3>
         <img src="${iconUrl}" alt="Weather Icon" />
-        <p>${minTemp}&deg;C / ${maxTemp}&deg;C</p>
+        <p>
+          <span class="min-temp">${minTemp}&deg;C</span> / 
+          <span class="max-temp">${maxTemp}&deg;C</span>
+        </p>
       </div>
     `;
   });
@@ -103,8 +96,7 @@ document.getElementById("search-form").addEventListener("submit", function (even
   if (city) {
     fetchWeather(city);
   } else {
-    document.getElementById("current-city").innerHTML =
-      "<strong>Please enter a city name</strong>";
+    document.getElementById("current-city").innerHTML = "<strong>Please enter a city name</strong>";
     document.getElementById("temperature").innerHTML = "";
     document.getElementById("weather-details").innerHTML = "";
     document.getElementById("weather-icon").innerHTML = "";
@@ -112,6 +104,4 @@ document.getElementById("search-form").addEventListener("submit", function (even
   }
 });
 
-// Initialize with a default city
 fetchWeather("Cape Town");
-
