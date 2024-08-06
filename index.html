@@ -15,44 +15,46 @@
   <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 </head>
 <body>
-  <div class="search-container">
-    <form class="box" id="search-form">
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search For Your City"
-      />
-      <input type="submit" value="Search" id="button" />
-    </form>
-  </div>
-  <div class="cont">
-    <h1 class="bebas-neue-regular" id="current-city">
-      <strong>Cape Town</strong>
-    </h1>
-    <div>
-      <p class="main" id="current-date">Friday 9:43pm</p>
-      <p class="main-2" id="weather-details">
-        Humidity: <span class="temp"><strong>50%</strong></span
-        >, Wind: <span class="temp"><strong>8.0 km/h</strong></span>, Description: <span class="temp"><strong>Clear Sky</strong></span>
-      </p>
+  <div class="container">
+    <div class="search-container">
+      <form class="box" id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search For Your City"
+        />
+        <input type="submit" value="Search" id="button" />
+      </form>
     </div>
-    <br />
-    <div class="current" id="temperature">
-      <strong>15&deg;</strong><em>C</em>
+    <div class="cont">
+      <h1 class="bebas-neue-regular" id="current-city">
+        <strong>Cape Town</strong>
+      </h1>
+      <div>
+        <p class="main" id="current-date">Friday 9:43pm</p>
+        <p class="main-2" id="weather-details">
+          Humidity: <span class="temp"><strong>50%</strong></span
+          >, Wind: <span class="temp"><strong>8.0 km/h</strong></span>, Description: <span class="temp"><strong>Clear Sky</strong></span>
+        </p>
+      </div>
+      <br />
+      <div class="current" id="temperature">
+        <strong>15&deg;</strong><em>C</em>
+      </div>
+      <div class="current" id="weather-icon">
+        <img src="" alt="Weather Icon" id="icon-image">
+      </div>
+      <br />
+      <br />
+      <div id="forecast" class="forecast">
+      
+      </div>
+      <footer>
+        Coded By Shanice Jones on
+        <a href="https://www.shecodes.io/">SheCodes</a> and is on <a href="https://github.com/OShaniceO/Weather-App-Project"> GitHub</a> and hosted on <a href="https://curious-truffle-2c4059.netlify.app/"> Netlify.</a>
+      </footer>
+      <br />
     </div>
-    <div class="current" id="weather-icon">
-      <img src="" alt="Weather Icon" id="icon-image">
-    </div>
-    <br />
-    <br />
-    <div id="forecast">
-    
-    </div><br/>
-    <footer>
-      Coded By Shanice Jones on
-      <a href="https://www.shecodes.io/">SheCodes</a> and is on <a href="https://github.com/OShaniceO/Weather-App-Project"> GitHub</a> and hosted on <a href="https://curious-truffle-2c4059.netlify.app/"> Netlify.</a>
-    </footer>
-    <br />
   </div>
   <script src="index.js"></script>
 </body>

@@ -21,6 +21,7 @@ function fetchWeather(city) {
       document.getElementById("weather-details").innerHTML =
         "Sorry, there was an error retrieving the weather data.";
       document.getElementById("weather-icon").innerHTML = "";
+      document.getElementById("forecast").innerHTML = "";
     });
 }
 
@@ -66,81 +67,51 @@ function updateWeatherDisplay(city, weatherInfo) {
     document.getElementById("weather-details").innerHTML =
       "Sorry, we don't know the weather for this city.";
     document.getElementById("weather-icon").innerHTML = "";
+    document.getElementById("forecast").innerHTML = "";
   }
 }
 
 function updateForecastDisplay(forecastData) {
-  const now = new Date();
-  const todayIndex = now.getDay();
+  const today = new Date().getDay();
+  let forecastHTML = '';
 
-  const forecastContainer = document.getElementById("forecast");
-  forecastContainer.innerHTML = "<h2>7-Day Forecast</h2>";
+  forecastData.forEach((day, index) => {
+    // Skip the forecast for today
+    if (index === 0) return;
 
-  const forecastGrid = document.createElement("div");
-  forecastGrid.classList.add("forecast-grid");
+    const dayName = new Date(day.valid_date).toLocaleDateString('en-US', { weekday: 'long' });
+    const minTemp = Math.round(day.min_temp);
+    const maxTemp = Math.round(day.max_temp);
+    const iconCode = day.weather.icon;
+    const iconUrl = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
 
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  forecastData.forEach((forecast, index) => {
-    if (index !== 0) { // Skip the current day
-      const forecastDay = document.createElement("div");
-      forecastDay.classList.add("forecast-day");
-
-      const dayIndex = (todayIndex + index) % 7;
-      const dayName = days[dayIndex];
-
-      const tempCelsius = Math.round(forecast.temp);
-      const iconCode = forecast.weather.icon;
-      const iconUrl = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
-
-      forecastDay.innerHTML = `
-        <p>${dayName}</p>
-        <img src="${iconUrl}" alt="Weather Icon">
-        <p>${tempCelsius}&deg;C</p>
-      `;
-
-      forecastGrid.appendChild(forecastDay);
-    }
+    forecastHTML += `
+      <div class="forecast-day">
+        <h3>${dayName}</h3>
+        <img src="${iconUrl}" alt="Weather Icon" />
+        <p>${minTemp}&deg;C / ${maxTemp}&deg;C</p>
+      </div>
+    `;
   });
 
-  forecastContainer.appendChild(forecastGrid);
+  document.getElementById("forecast").innerHTML = forecastHTML;
 }
 
-document
-  .getElementById("search-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    const city = document.getElementById("search-input").value.trim();
-    if (city) {
-      fetchWeather(city);
-    } else {
-      document.getElementById("current-city").innerHTML =
-        "<strong>Please enter a city name</strong>";
-      document.getElementById("temperature").innerHTML = "";
-      document.getElementById("weather-details").innerHTML = "";
-      document.getElementById("weather-icon").innerHTML = "";
-    }
-  });
+document.getElementById("search-form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  const city = document.getElementById("search-input").value.trim();
+  if (city) {
+    fetchWeather(city);
+  } else {
+    document.getElementById("current-city").innerHTML =
+      "<strong>Please enter a city name</strong>";
+    document.getElementById("temperature").innerHTML = "";
+    document.getElementById("weather-details").innerHTML = "";
+    document.getElementById("weather-icon").innerHTML = "";
+    document.getElementById("forecast").innerHTML = "";
+  }
+});
 
-function updateTime() {
-  const now = new Date();
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const day = days[now.getDay()];
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  document.getElementById("current-date").textContent =
-    `${day} ${hours}:${minutes}`;
-}
-
-setInterval(updateTime, 1000);
-updateTime();
-
+// Initialize with a default city
 fetchWeather("Cape Town");
+
